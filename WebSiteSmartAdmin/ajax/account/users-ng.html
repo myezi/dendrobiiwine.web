@@ -1,0 +1,176 @@
+﻿<!-- widget grid -->
+<section id="sectionUsers" class="">
+
+    <!-- row -->
+    <div class="row" ng-controller="userController">
+
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="alert alert-info">
+                <strong>Note:</strong> The admin manage all user in this list.
+            </div>
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="divTable" data-widget-editbutton="false">
+
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>User List</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <table id="dtMain" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="all" style="width:30px">Pic</th>
+                                    <th class="all"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Name</th>
+                                    <th class="min-tablet-l">Email</th>
+                                    <th class="min-tablet-l"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Phone</th>
+                                    <th class="all"><i class="fa fa-fw fa-group txt-color-blue hidden-md hidden-sm hidden-xs"></i> Roles</th>
+                                    <th class="all">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget 编辑-->
+            <div class="jarviswidget col-sm-12" id="divEdit" data-widget-editbutton="false" data-widget-custombutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                    <h2>{{EditType}}</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="formEdit" class="smart-form">
+                            <header>
+                                User form
+                            </header>
+                            <input type="hidden" name="Id" ng-model="User.Id" />
+                            <fieldset>
+                                <section>
+                                    <label class="label">User Name</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="username" placeholder="User Name" ng-model="User.UserName" data-bind="value:UserName,enable:IsNew" data-validate="required;minlength:2">
+                                    </label>
+                                </section>
+                                    <section ng-hide="IsNew()">
+                                        <label class="label">Must Provide Old One to Change Password</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-lock"></i>
+                                            <input type="password" name="oldpassword" placeholder="Old Password" ng-model="User.OldPassword" 
+                                                    data-bind="value:OldPassword,attr:{'data-validate':IsNew() ? '' : 'minlength:6' }">
+                                        </label>
+                                    </section>
+                                <section>
+                                    <label class="label">New Password</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" name="password" placeholder="Password" id="password" ng-model="User.Password" 
+                                                data-bind="value:Password,attr:{'data-validate':IsNew() ? 'required;minlength:6' : 'minlength:6' }">
+                                    </label>
+                                </section>
+                                <section>
+                                    <label class="label">Confirm Password</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" name="passwordConfirm" placeholder="Confirm password" data-validate="minlength:3;equalTo:#password">
+                                    </label>
+                                </section>
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="label">Email</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-envelope-o"></i>
+                                            <input type="text" name="emal" placeholder="Email" ng-model="User.Email" data-validate="required;email">
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="label">Phone Number</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-phone"></i>
+                                            <input type="text" name="phonenumber" placeholder="Phone Number" ng-model="User.PhoneNumber"  data-validate="required;digits">
+                                        </label>
+                                    </section>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <label class="label">Roles</label>
+                                <div class="inline-group">
+                                    <label class="checkbox" ng-repeat="role in RoleList">
+                                        <input type="checkbox"  check-list="User.Roles" value="{{role}}">
+                                        <i></i>{{role}}
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-danger" ng-click="backtolist()">
+                                    Back
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="save()">
+                                    Save
+                                </button>
+                            </footer>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- WIDGET END -->
+
+    </div>
+    <!-- end row -->
+
+</section>
+<!-- end widget grid -->
+
+<script type="text/javascript">
+    $.getScript("/js/app/account/users-ng.js", function () {
+        pageSetUp();
+        pagefunction();
+    });
+</script>
